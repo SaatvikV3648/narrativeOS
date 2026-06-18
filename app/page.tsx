@@ -4,8 +4,8 @@ import { ArrowRight, ChevronRight } from 'lucide-react';
 
 import SpikdLogo from '@/components/brand/SpikdLogo';
 import LandingStorySections from '@/components/landing/LandingStorySections';
+import { PremiumHeroBackground } from '@/components/ui/background-components';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
-import { GradientBackground } from '@/components/ui/gradient-backgrounds';
 
 const navItems = [
   { label: 'Problem', href: '#problem' },
@@ -19,7 +19,7 @@ function PrimaryCta({ children }: { children: ReactNode }) {
   return (
     <Link
       href="/login"
-      className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-black px-6 text-sm font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-zinc-900"
+      className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-[#050712] shadow-[0_18px_50px_rgba(255,255,255,0.14)] transition duration-200 hover:-translate-y-0.5 hover:bg-[#f4f7ff]"
     >
       {children}
       <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
@@ -31,7 +31,7 @@ function SecondaryCta({ children, href = '#how-it-works' }: { children: ReactNod
   return (
     <Link
       href={href}
-      className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-6 text-sm font-semibold text-black transition duration-200 hover:-translate-y-0.5 hover:border-[#d0d0d0] hover:bg-[#fafafa]"
+      className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/18 bg-white/8 px-6 text-sm font-semibold text-white backdrop-blur-xl transition duration-200 hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/12"
     >
       {children}
       <ChevronRight className="h-4 w-4" />
@@ -59,15 +59,18 @@ export default function HomePage() {
         </nav>
       </header>
 
-      <div className="relative overflow-hidden bg-white">
-        <GradientBackground />
+      <div className="relative overflow-hidden bg-[#050712]">
+        <PremiumHeroBackground />
         <section className="relative z-10 px-5 pb-12 pt-36 text-center sm:px-8 sm:pt-44">
           <div className="mx-auto max-w-5xl">
             <div className="reveal-up">
-              <h1 className="mx-auto max-w-5xl font-sans text-5xl font-bold leading-[0.92] tracking-[-0.08em] text-black sm:text-7xl lg:text-8xl">
+              <p className="mx-auto mb-6 inline-flex rounded-full border border-white/12 bg-white/8 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-cyan-100/85 backdrop-blur-xl">
+                Proof intelligence for high-achievers
+              </p>
+              <h1 className="mx-auto max-w-5xl font-sans text-5xl font-bold leading-[0.92] tracking-[-0.08em] text-white drop-shadow-[0_24px_70px_rgba(59,130,246,0.32)] sm:text-7xl lg:text-8xl">
                 Turn activities into a story colleges believe.
               </h1>
-              <p className="mx-auto mt-7 max-w-3xl text-lg leading-8 text-[#555555] sm:text-xl sm:leading-9">
+              <p className="mx-auto mt-7 max-w-3xl text-lg leading-8 text-slate-200/82 sm:text-xl sm:leading-9">
                 Spikd analyzes your extracurriculars, identifies missing signals, and builds proof-driven roadmaps around your strongest spike.
               </p>
               <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
@@ -82,11 +85,11 @@ export default function HomePage() {
           <ContainerScroll
             titleComponent={(
               <div>
-                <p className="text-sm font-bold uppercase tracking-[0.24em] text-[#999999]">Product preview</p>
-                <h2 className="mx-auto mt-5 max-w-4xl font-sans text-4xl font-bold leading-tight tracking-[-0.06em] text-black sm:text-6xl">
-                  See your story become <span className="gradient-text">measurable</span>.
+                <p className="text-sm font-bold uppercase tracking-[0.24em] text-cyan-100/60">Product preview</p>
+                <h2 className="mx-auto mt-5 max-w-4xl font-sans text-4xl font-bold leading-tight tracking-[-0.06em] text-white sm:text-6xl">
+                  See your story become <span className="text-cyan-200">measurable</span>.
                 </h2>
-                <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-[#555555] sm:text-lg">
+                <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-200/72 sm:text-lg">
                   Narrative Score, Proof Score, Roadmaps, and Peer Benchmarks in one workspace.
                 </p>
               </div>
