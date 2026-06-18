@@ -1,24 +1,15 @@
-type PremiumHeroBackgroundProps = {
+type LandingTopWashProps = {
   className?: string;
 };
 
-export function PremiumHeroBackground({ className }: PremiumHeroBackgroundProps) {
+export function LandingTopWash({ className }: LandingTopWashProps) {
   return (
     <div
       aria-hidden="true"
       className={[
-        'pointer-events-none absolute inset-0 z-0 overflow-hidden',
+        'landing-top-wash pointer-events-none absolute inset-x-0 top-0 z-0 h-[300px] overflow-hidden sm:h-[420px]',
         className,
       ].filter(Boolean).join(' ')}
-    >
-      <div className="hero-depth-gradient absolute inset-0" />
-      <div className="hero-grid-overlay absolute inset-0" />
-      <div className="hero-noise-overlay absolute inset-0" />
-      <div className="hero-headline-glow hero-headline-glow-left" />
-      <div className="hero-headline-glow hero-headline-glow-right" />
-      <div className="hero-drift-field hero-drift-field-one" />
-      <div className="hero-drift-field hero-drift-field-two" />
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-white" />
-    </div>
+    />
   );
 }
