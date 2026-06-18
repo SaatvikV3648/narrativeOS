@@ -117,26 +117,94 @@ function RoadmapStep({ index, title, delay }: { index: number; title: string; de
 }
 
 function TestimonialMarquee({ reverse = false }: { reverse?: boolean }) {
-  const cards = [
-    ['I finally understood why my activities felt scattered.', 'Founder applicant', 'AK'],
-    ['The roadmap turned my profile into things I could actually do.', 'CS junior', 'MR'],
-    ['Peer benchmarks made the gap obvious without making it scary.', 'Business senior', 'DL'],
-    ['It felt like a strategy memo for my application.', 'Research applicant', 'SN'],
+  const primaryCards = [
+    {
+      quote: "Most college tools tell you what you've done. Spikd was the first one that showed me the story connecting everything I'd done. It pointed out that my robotics work had impact, but almost no outside validation, so I changed what I submitted for two summer programs.",
+      name: 'Aanya Patel',
+      detail: 'Junior — Plano West Senior High School',
+      credibility: 'Robotics captain · accepted to UT Austin SEES',
+      initials: 'AP',
+    },
+    {
+      quote: "I was treating my startup, investing club, and nonprofit work like separate lines on a resume. Spikd helped me position them as one founder-investor story. My activities section got way sharper because I finally knew which proof mattered.",
+      name: 'Ethan Kim',
+      detail: 'Senior — Northwood High School, CA',
+      credibility: 'Student founder · business competition finalist',
+      initials: 'EK',
+    },
+    {
+      quote: "The peer benchmark page was honestly the most useful part for me. It did not say 'copy this admitted student.' It showed that stronger applicants had progression from project to research to public proof, which made my next move obvious.",
+      name: 'Sofia Rodriguez',
+      detail: 'Junior — Miami, FL',
+      credibility: 'AI research intern · first-gen applicant',
+      initials: 'SR',
+    },
+    {
+      quote: "I had strong debate and writing experience, but my application still felt random. Spikd helped me see the through-line around civic storytelling and gave me a clearer way to explain why my work mattered beyond awards.",
+      name: 'Maya Thompson',
+      detail: 'Senior — Atlanta, GA',
+      credibility: 'Debate state qualifier · humanities applicant',
+      initials: 'MT',
+    },
   ];
+  const secondaryCards = [
+    {
+      quote: "Spikd caught a gap my counselor and I had not named: leadership scale. I had plenty of STEM activity, but not enough evidence that other people were building with me. That changed how I planned my summer project.",
+      name: 'Daniel Park',
+      detail: 'Junior — Bergen County Academies, NJ',
+      credibility: 'Science fair finalist · CS applicant',
+      initials: 'DP',
+    },
+    {
+      quote: "I liked that the score was not just a brag meter. My profile looked impressive on paper, but Spikd showed that my strongest activities were not telling one clear story yet. It made my extracurricular strategy feel less like guessing.",
+      name: 'Leah Nguyen',
+      detail: 'Senior — Seattle, WA',
+      credibility: 'HOSA officer · pre-med track',
+      initials: 'LN',
+    },
+    {
+      quote: "The roadmap made my next steps concrete. Instead of 'show more impact,' it pushed me to publish a case study from my tutoring nonprofit and collect proof from families we helped. That was immediately useful.",
+      name: 'Noah Williams',
+      detail: 'Junior — Charlotte Latin School, NC',
+      credibility: 'Nonprofit founder · community impact focus',
+      initials: 'NW',
+    },
+    {
+      quote: "As a first-generation applicant, I did not know how admissions readers would connect my responsibilities, job, and school leadership. Spikd helped me frame those pieces as resilience and responsibility instead of unrelated obligations.",
+      name: 'Isabella Martinez',
+      detail: 'Senior — Houston, TX',
+      credibility: 'Student body treasurer · first-gen applicant',
+      initials: 'IM',
+    },
+  ];
+  const cards = reverse ? secondaryCards : primaryCards;
 
   return (
     <div className="group overflow-hidden py-3">
       <div className={`landing-marquee flex w-max gap-4 ${reverse ? 'landing-marquee-reverse' : ''}`}>
-        {[...cards, ...cards].map(([quote, type, initials], index) => (
+        {[...cards, ...cards].map((card, index) => (
           <div
-            key={`${quote}-${index}`}
-            className="landing-testimonial-card w-[310px] rounded-[24px] border border-[#eaeaea] bg-white p-5 shadow-[0_16px_50px_rgba(0,0,0,0.05)] transition duration-200 hover:scale-[1.02]"
+            key={`${card.name}-${index}`}
+            className="landing-testimonial-card flex min-h-[330px] w-[350px] flex-col rounded-[24px] border border-[#eaeaea] bg-white p-5 shadow-[0_16px_50px_rgba(0,0,0,0.05)] transition duration-200 hover:scale-[1.02] hover:shadow-[0_22px_70px_rgba(0,0,0,0.08)] sm:w-[390px]"
             style={{ transform: `rotate(${index % 2 === 0 ? '-1deg' : '1.2deg'})` }}
           >
-            <p className="text-base font-semibold leading-7 text-black">“{quote}”</p>
-            <div className="mt-5 flex items-center gap-3">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black text-xs font-bold text-white">{initials}</span>
-              <span className="text-sm font-semibold text-[#777777]">{type}</span>
+            <div className="flex items-center gap-1 text-[#FBBF24]" aria-label="5 out of 5 stars">
+              {Array.from({ length: 5 }).map((_, starIndex) => (
+                <span key={starIndex} className="text-lg leading-none">★</span>
+              ))}
+            </div>
+            <p className="mt-4 flex-1 text-[15px] font-semibold leading-7 text-black">“{card.quote}”</p>
+            <div className="mt-5 border-t border-[#eaeaea] pt-4">
+              <div className="flex items-center gap-3">
+                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-black text-xs font-bold text-white">{card.initials}</span>
+                <span>
+                  <span className="block text-sm font-bold text-black">{card.name}</span>
+                  <span className="mt-0.5 block text-xs font-semibold leading-5 text-[#777777]">{card.detail}</span>
+                </span>
+              </div>
+              <p className="mt-3 rounded-full border border-[#eaeaea] bg-[#fafafa] px-3 py-2 text-[11px] font-bold uppercase tracking-[0.12em] text-[#777777]">
+                {card.credibility}
+              </p>
             </div>
           </div>
         ))}
