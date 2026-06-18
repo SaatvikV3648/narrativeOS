@@ -33,6 +33,26 @@ export function calculateProofScore(signalBuilders: RoadmapOpportunity[]) {
   };
 }
 
+export function calculateDerivedNarrativeScore(
+  roadmap: Pick<NarrativeRoadmap, 'currentNarrative' | 'potentialScorePath' | 'signalBuilders'>,
+) {
+  const actions = getRoadmapActions(roadmap.signalBuilders);
+  const currentScore = roadmap.currentNarrative.currentScore;
+  const targetScore = (roadmap.potentialScorePath as NarrativeRoadmap['potentialScorePath'] & { targetScore?: number }).targetScore
+    ?? roadmap.potentialScorePath.potentialScore;
+  const completionBoost = actions.reduce((total, action) => {
+    if (action.status !== 'Completed') return total;
+    return total + (hasActionEvidence(action) ? 2 : 1);
+  }, 0);
+
+  return {
+    currentScore,
+    targetScore,
+    completionBoost,
+    derivedNarrativeScore: Math.min(targetScore, currentScore + completionBoost),
+  };
+}
+
 export function calculateDynamicScorePath(roadmap: Pick<NarrativeRoadmap, 'potentialScorePath' | 'signalBuilders'>) {
   const proof = calculateProofScore(roadmap.signalBuilders);
   const currentScore = roadmap.potentialScorePath.currentScore;

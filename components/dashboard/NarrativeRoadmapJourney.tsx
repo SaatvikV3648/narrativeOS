@@ -5,7 +5,7 @@ import { ChevronDown } from 'lucide-react';
 
 import { GradientButton, SectionLabel } from '@/components/dashboard/LightDashboardPrimitives';
 import type { NarrativeRoadmap, RoadmapActionStatus, RoadmapOpportunity } from '@/lib/roadmap/mock';
-import { calculateDynamicScorePath, getRoadmapActions } from '@/lib/roadmap/progress';
+import { calculateDerivedNarrativeScore, calculateDynamicScorePath, getRoadmapActions } from '@/lib/roadmap/progress';
 
 const statuses: RoadmapActionStatus[] = ['Not Started', 'In Progress', 'Completed'];
 
@@ -22,6 +22,7 @@ export default function NarrativeRoadmapJourney({ roadmap, roadmapId }: { roadma
 
   const actions = useMemo(() => getRoadmapActions(signalBuilders), [signalBuilders]);
   const scorePath = useMemo(() => calculateDynamicScorePath(liveRoadmap), [liveRoadmap]);
+  const narrativeScore = useMemo(() => calculateDerivedNarrativeScore(liveRoadmap), [liveRoadmap]);
 
   async function saveAction(
     signalIndex: number,
@@ -95,7 +96,7 @@ export default function NarrativeRoadmapJourney({ roadmap, roadmapId }: { roadma
   return (
     <div className="space-y-4">
       <section className="grid gap-4 sm:grid-cols-3">
-        <BaselineCard label="Narrative" value={String(roadmap.currentNarrative.currentScore)} progress={roadmap.currentNarrative.currentScore} />
+        <BaselineCard label="Narrative" value={String(narrativeScore.derivedNarrativeScore)} progress={narrativeScore.derivedNarrativeScore} />
         <BaselineCard label="Proof" value={`${scorePath.percentage}%`} progress={scorePath.percentage} />
         <BaselineCard label="Potential" value={String(roadmap.potentialScorePath.potentialScore)} gradient />
       </section>
@@ -117,7 +118,7 @@ export default function NarrativeRoadmapJourney({ roadmap, roadmapId }: { roadma
 
       <section className="glass-card p-6">
         <div className="flex items-center justify-between gap-4">
-          <span className="font-serif text-xl font-semibold text-black">{scorePath.currentScore}</span>
+          <span className="font-serif text-xl font-semibold text-black">{narrativeScore.derivedNarrativeScore}</span>
           <span className="font-serif text-xl font-semibold"><span className="gradient-text">{scorePath.potentialScore}</span></span>
         </div>
         <div className="relative mt-8 h-12">
@@ -142,7 +143,7 @@ export default function NarrativeRoadmapJourney({ roadmap, roadmapId }: { roadma
           })}
         </div>
         <p className="mt-5 text-right text-xs font-semibold text-[var(--text-muted)]">
-          {scorePath.completedWithEvidence}/{scorePath.total} proven · +{scorePath.earnedGain} unlocked
+          {scorePath.completedWithEvidence}/{scorePath.total} proven · +{narrativeScore.completionBoost} narrative boost
         </p>
       </section>
 
