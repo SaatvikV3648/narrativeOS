@@ -3,6 +3,8 @@ import OnboardingFlow from '@/components/onboarding/OnboardingFlow';
 import { redirect } from 'next/navigation';
 import type { Profiles } from '@/lib/supabase/types';
 
+export const dynamic = "force-dynamic";
+
 export default async function OnboardingPage() {
   const supabase = createSupabaseServerClient();
   const { data: userData } = await supabase.auth.getUser();

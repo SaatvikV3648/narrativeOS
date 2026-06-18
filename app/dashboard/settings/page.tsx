@@ -5,6 +5,8 @@ import { LightDashboardFrame, PageHeader, SectionLabel } from '@/components/dash
 import DashboardShell from '@/components/layout/DashboardShell';
 import { createSupabaseServerClient } from '@/lib/supabase/server';
 
+export const dynamic = "force-dynamic";
+
 export default async function SettingsPage() {
   const supabase = createSupabaseServerClient();
   const { data: userData } = await supabase.auth.getUser();

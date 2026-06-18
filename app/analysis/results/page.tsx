@@ -6,6 +6,8 @@ import { mockNarrativeAnalysis, storedAnalysisToNarrative } from '@/lib/narrativ
 import { PRO_PRICE_LABEL } from '@/lib/pricing';
 import { createSupabaseServerClient } from '@/lib/supabase/server';
 
+export const dynamic = "force-dynamic";
+
 export default async function AnalysisResultsPage() {
   const supabase = createSupabaseServerClient();
   const { data: userData } = await supabase.auth.getUser();

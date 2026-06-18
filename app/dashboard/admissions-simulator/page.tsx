@@ -1,6 +1,8 @@
 import { GradientButton, LightDashboardFrame } from '@/components/dashboard/LightDashboardPrimitives';
 import DashboardShell from '@/components/layout/DashboardShell';
 
+export const dynamic = "force-dynamic";
+
 export default function AdmissionsSimulatorPage() {
   return (
     <DashboardShell>

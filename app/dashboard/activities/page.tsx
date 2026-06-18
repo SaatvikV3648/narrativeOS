@@ -6,6 +6,8 @@ import DashboardShell from '@/components/layout/DashboardShell';
 import { createSupabaseServerClient } from '@/lib/supabase/server';
 import type { Activities, Profiles } from '@/lib/supabase/types';
 
+export const dynamic = "force-dynamic";
+
 export default async function ActivitiesPage() {
   const supabase = createSupabaseServerClient();
   const { data: userData } = await supabase.auth.getUser();

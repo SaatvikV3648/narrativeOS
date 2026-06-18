@@ -10,6 +10,8 @@ import { loadAdmittedProfiles, matchAdmittedProfiles } from '@/lib/peer-benchmar
 import { createSupabaseServerClient } from '@/lib/supabase/server';
 import type { Activities, Profiles } from '@/lib/supabase/types';
 
+export const dynamic = "force-dynamic";
+
 export default async function PeerBenchmarksPage({
   searchParams,
 }: {
