@@ -9,10 +9,11 @@ export default function GoogleSignInButton() {
 
   const handleGoogleSignIn = async () => {
     setLoading(true);
+    const siteOrigin = (process.env.NEXT_PUBLIC_SITE_URL || window.location.origin).replace(/\/$/, '');
     const { error } = await supabaseClient.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${window.location.origin}/auth/callback?next=/onboarding`,
+        redirectTo: `${siteOrigin}/auth/callback?next=/onboarding`,
       },
     });
 
